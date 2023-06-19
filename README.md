@@ -84,9 +84,10 @@ For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/
 Now its time to create a new advert or edit an existing one.
 
 Note that:
- - You can only have one advert per license plate since you can publish it multiple times.
- - Use `Advertiser locations lookup` to obtain the `locationKey` of advert. Locations are read-only on the API and managed on Backoffice.
- - Changes made to an already published (online) advert will never take effect until you republish it again.
+ - You can only have one advert per license plate since you can publish it multiple times;
+ - To add photos you need to create the advert first;
+ - Use `Advertiser locations lookup` to obtain the `locationKey` of advert. Locations are read-only on the API and managed on Backoffice;
+ - Changes made to an already published (online) advert will never take effect until you republish it again;
 
 Please use the REST API endpoints grouped as `Advertiser locations lookup` and `Adverts Management`.
 For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/swagger
@@ -98,7 +99,8 @@ The final step is meant to manage the presence of the advert on Auto SAPO, takin
 This step is asynchronous, so, all the necessary actions to take one advert online/offline will be processed in background.
 
 Note that:
- - A publication is a online snapshot of one advert, so changes on the advert wil not affect 
+ - A publication is a online snapshot of one advert;
+ - Changes on the adverts (step 3) will not get online until the publish operation is invoked;
 
 Please use the REST API endpoints grouped as `Adverts Publication`.
 For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/swagger
