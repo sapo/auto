@@ -2,7 +2,7 @@
 
 # Overview
 
-The Auto SAPO Integration API is organized around REST taking advantage of all semantics of Standard HTTP like status codes and verbs.
+The Auto SAPO Integration API is organized around REST, taking advantage of all semantics of Standard HTTP like status codes and verbs.
 
 We have adopted json as the default and only format for all Requests and Responses.
 
@@ -15,20 +15,20 @@ To use the API is required to follow these steps:
 We provide two environments of Integration API:
 
 ### SANDBOX
-The purpose of SANDBOX environment is to provide a stable and controlled way to help to develop and test your application when communicating with Auto SAPO.
+The purpose of SANDBOX environment is to provide a stable and controlled way to help you to develop and test your application when communicating with Auto SAPO.
 
 Is **HIGHLY RECOMENDED** to develop and test all functionalities on your use cases before start using Production environment. 
 
-**ATTENTION** - Due to the testing nature of this environment, data will periodically wiped out, so you SHOULD consider that (for example) overnight you might lose adverts, photos, publications, etc,...
+**ATTENTION** - Due to the testing nature of this environment, data will periodically wiped out, so you **SHOULD** consider that (for example) overnight you might lose adverts, photos, publications, etc,...
 
 This environment uses the following base addresses:
  - AUTHORIZATION: https://auto-oauth-sbx.sapo.pt
  - INTEGRATION API: https://auto-integration-sbx.sapo.pt
 
 ### PRODUCTION
-Production is the live environment where all interactions will take effect.
+Production is the live environment where all interactions will take effect on Auto SAPO website.
 
-You SHOULD NEVER use this environment to test functionalities.
+You **SHOULD NEVER** use this environment to test functionalities.
 
 This environment uses the following base addresses:
  - AUTHORIZATION: https://TBA
@@ -39,7 +39,7 @@ This environment uses the following base addresses:
 
 Before you start managing and publishing your adverts, you will need to obtain one `access_token` in order to be able to interact with the API. 
 
-To obtain the `access_token` you need to use a `client_id` and a `client_secret` witch you can obtain using Backoffice on "Conta > Aplicações" to generate a new "Application Access" where they are provided.
+To obtain the `access_token` you need to use a `client_id` and a `client_secret` witch you can obtain using Backoffice on "Conta > Aplicações" to create a new "Application Access".
 
 **Request to obtain access token**
 ```sh
