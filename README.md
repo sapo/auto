@@ -35,7 +35,7 @@ This environment uses the following base addresses:
  - INTEGRATION API: https://TBA
 
 ---
-# SETP 1 - Authorization
+# STEP 1 - Authorization
 
 Before you start managing and publishing your adverts, you will need to obtain one `access_token` in order to be able to interact with the API. 
 
@@ -93,7 +93,7 @@ Please use the REST API endpoints grouped as `Advertiser locations lookup` and `
 For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/swagger
 
 ---
-# SETP 4 - Publish Adverts
+# STEP 4 - Publish Adverts
 
 The final step is meant to manage the presence of the advert on Auto SAPO, taking it online/offline.
 This step is asynchronous, so, all the necessary actions to take one advert online/offline will be processed in background.
