@@ -2,11 +2,11 @@
 
 # Overview
 
-The Auto SAPO Integration API is organized around REST, taking advantage of all semantics of Standard HTTP like status codes and verbs.
+The Auto SAPO Integration API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer), taking advantage of all semantics of Standard HTTP like status codes and verbs.
 
-We have adopted json as the default and only format for all Requests and Responses.
+We have adopted [JSON](https://en.wikipedia.org/wiki/JSON) as the default and only format for all Requests and Responses.
 
-To use the API is required to follow these steps:
+To use the API, these steps must be followed:
  - Step 1 - **Authorization** - *Get a access_token*
  - Step 2 - **Locate vehicle** - *Find or Request a vehicle creation*
  - Step 3 - **Manage Adverts** - *Compose Adverts*
@@ -17,9 +17,9 @@ We provide two environments of Integration API:
 ### SANDBOX
 The purpose of SANDBOX environment is to provide a stable and controlled way to help you to develop and test your application when communicating with Auto SAPO.
 
-Is **HIGHLY RECOMENDED** to develop and test all functionalities on your use cases before start using Production environment. 
+It is **HIGHLY RECOMMENDED** to develop and test all functionalities on your use cases before start using Production environment. 
 
-**ATTENTION** - Due to the testing nature of this environment, data will periodically wiped out, so you **SHOULD** consider that (for example) overnight you might lose adverts, photos, publications, etc,...
+**ATTENTION** - Due to the testing nature of this environment, data will be periodically wiped out, so you **SHOULD** consider that (for example) overnight you might lose adverts, photos, publications, etc,...
 
 This environment uses the following base addresses:
  - AUTHORIZATION: https://auto-oauth-sbx.sapo.pt
@@ -39,7 +39,7 @@ This environment uses the following base addresses:
 
 Before you start managing and publishing your adverts, you will need to obtain one `access_token` in order to be able to interact with the API. 
 
-To obtain the `access_token` you need to use a `client_id` and a `client_secret` witch you can obtain using Backoffice on "Conta > Aplicações" to create a new "Application Access".
+To obtain the `access_token` you need to use a `client_id` and a `client_secret` which you can obtain using Backoffice on "Conta > Aplicações" to create a new "Application Access".
 
 **Request to obtain access token**
 ```sh
@@ -70,7 +70,7 @@ curl -H "Authorization: Bearer <TOKEN_FROM_OAUTH_ENDPOINT>" \
  ---
 # STEP 2 - Locate vehicle
 
-Before an advert can be created, is necessary to ensure that AutoSAPO knowns the vehicle's License plate.
+Before an advert can be created, it is necessary to ensure that AutoSAPO knowns the vehicle's License plate.
 
 If a license plate is not yet known, you can request to add it.
 
@@ -81,7 +81,7 @@ For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/
 ---
 # STEP 3 - Manage Adverts
 
-Now its time to create a new advert or edit an existing one.
+Now it's time to create a new advert or edit an existing one.
 
 Note that:
  - You can only have one advert per license plate since you can publish it multiple times;
@@ -96,7 +96,8 @@ For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/
 # STEP 4 - Publish Adverts
 
 The final step is meant to manage the presence of the advert on Auto SAPO, taking it online/offline.
-This step is asynchronous, so, all the necessary actions to take one advert online/offline will be processed in background.
+
+This step is asynchronous therefore, all the necessary actions to take one advert online/offline will be processed in background.
 
 Note that:
  - A publication is a online snapshot of one advert;
