@@ -92,6 +92,7 @@ curl -X HEAD https://auto-integration-sbx.sapo.pt/vehicles/VIN/{vin} \
 ```
 
 If AutoSAPO doesn't have the vehicle's information, you can request to add it.
+
 **Example of vehicle's creation**
 ```sh
 curl -X POST https://auto-integration-sbx.sapo.pt/vehicles \
