@@ -99,14 +99,14 @@ curl -X POST https://auto-integration-sbx.sapo.pt/vehicles \
 	 -H "Content-Type: application/json" \
 	 -d "{ ...vehicle properties...  }" 
 
-
 # A response with the status code:
-#   - 200 means we have the vehicle's information
-#   - 404 means we don't have the vehicle's information
+#   - 201 means you have added the vehicle's information
+#   - 400 means that something is wrong on vehicle's information
 ```
 
-
 Please use the REST API endpoints grouped as `Vehicles` and `Vehicles lookup data`.
+
+***NOTE:*** *If you detect that some lookup data is missing (as for example when a manufacturer releases a new model or version) you are always welcome to request us to add it.*
 
 For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/swagger
 
