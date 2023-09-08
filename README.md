@@ -21,12 +21,16 @@ It is **HIGHLY RECOMMENDED** to develop and test all functionalities on your use
 
 **ATTENTION** - Due to the testing nature of this environment, data will be periodically wiped out, so you **SHOULD** consider that (for example) overnight you might lose adverts, photos, publications, etc,...
 
+If you don't have a SANDBOX advertiser account yet, you can create a new one using the following address: https://auto-frontoffice-sbx.sapo.pt/
+
 This environment uses the following base addresses:
  - AUTHORIZATION: https://auto-oauth-sbx.sapo.pt
  - INTEGRATION API: https://auto-integration-sbx.sapo.pt
 
 ### PRODUCTION
 Production is the live environment where all interactions will take effect on Auto SAPO website.
+
+New accounts should be created using the following address: https://auto-frontoffice.sapo.pt/
 
 You **SHOULD NEVER** use this environment to test functionalities.
 
