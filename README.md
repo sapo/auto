@@ -47,36 +47,64 @@ To obtain the `access_token` you need to use a `client_id` and a `client_secret`
 
 **Request to obtain access token**
 ```sh
-curl -d '{"client_id":"yEybaeZzlKz0tSZt","client_secret":"DdgMCk24nGwIq1icUvaNxDpL46QWgQge"}' \
-	-H "Content-Type: application/json" \
-	-X POST https://auto-oauth-sbx.sapo.pt/token
+curl -X POST https://auto-oauth-sbx.sapo.pt/token \
+	-H "Content-Type: application/json" \	
+	-d '{"client_id":"XXXXX","client_secret":"YYYYY"}' 
 ```
 
 **Response with access token**
 ```json
 {
-  "access_token":"...ey87Jkujdfuhdfiuhf2332d776sahbGciOiJSUzI1N...",
+  "access_token":"...ey87JkJSUzI1N...",
   "expires_in":28800
 }
 ```
 
 Now you are able to send requests using the Authorization header as follows:
 ```sh
-curl -H "Authorization: Bearer <TOKEN_FROM_OAUTH_ENDPOINT>" \
-	-X GET https://auto-integration.staging.sapo.pt/adverts
+curl -X GET https://auto-integration.staging.sapo.pt/adverts \
+	 -H "Authorization: Bearer <TOKEN_FROM_OAUTH_ENDPOINT>"
 ```
 
 
 ### Endpoints
  - SANDBOX: https://auto-oauth-sbx.sapo.pt/token
- - PRODUCTION: https://TBA
- 
+ - PRODUCTION: https://auto-oauth.sapo.pt/token
+
  ---
-# STEP 2 - Locate vehicle
+# STEP 2 - Check vehicle's existence
 
-Before an advert can be created, it is necessary to ensure that AutoSAPO knowns the vehicle's License plate.
+Before an advert can be created, it is necessary to ensure that AutoSAPO has the vehicle's Information, you can check it by License plate OR VIN.
 
-If a license plate is not yet known, you can request to add it.
+**Examples of check request**
+```sh
+curl -X HEAD https://auto-integration-sbx.sapo.pt/vehicles/{licenceplate} \
+	 -H "Authorization: Bearer {access_token}" 
+
+# OR
+
+curl -X HEAD https://auto-integration-sbx.sapo.pt/vehicles/VIN/{vin} \
+	 -H "Authorization: Bearer {access_token}" 
+
+# A response with the status code:
+#   - 200 means we have the vehicle's information
+#   - 404 means we don't have the vehicle's information
+```
+
+If AutoSAPO doesn't have the vehicle's information, you can request to add it.
+**Example of vehicle's creation**
+```sh
+curl -X POST https://auto-integration-sbx.sapo.pt/vehicles \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Content-Type: application/json" \
+	 -d "{ ...vehicle properties...  }" 
+
+
+# A response with the status code:
+#   - 200 means we have the vehicle's information
+#   - 404 means we don't have the vehicle's information
+```
+
 
 Please use the REST API endpoints grouped as `Vehicles` and `Vehicles lookup data`.
 
