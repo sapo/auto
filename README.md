@@ -35,8 +35,8 @@ New accounts should be created using the following address: https://auto-frontof
 You **SHOULD NEVER** use this environment to test functionalities.
 
 This environment uses the following base addresses:
- - AUTHORIZATION: https://TBA
- - INTEGRATION API: https://TBA
+ - AUTHORIZATION: https://auto-oauth.sapo.pt/
+ - INTEGRATION API: https://auto-integration.sapo.pt/
 
 ---
 # STEP 1 - Authorization
