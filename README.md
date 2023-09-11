@@ -65,7 +65,7 @@ Now you are able to send requests using the Authorization header as follows:
 curl -X GET https://auto-integration.staging.sapo.pt/adverts \
 	 -H "Authorization: Bearer <TOKEN_FROM_OAUTH_ENDPOINT>"
 ```
-
+***NOTE:*** *It is expected the reutilization of access_token across multiple calls while it is valid. You **SHOULD NOT** create an access_token per endpoint call.*
 
 ### Endpoints
  - SANDBOX: https://auto-oauth-sbx.sapo.pt/token
