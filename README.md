@@ -116,6 +116,29 @@ For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/
 
 Now it's time to create a new advert or edit an existing one.
 
+**Example of advert's creation**
+```sh
+curl -X POST https://auto-integration-sbx.sapo.pt/adverts \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Content-Type: application/json" \
+	 -d "{ ...advert properties...  }" 
+
+# A response with the status code:
+#   - 201 means the advert was created
+#   - 400 means that something is wrong in advert request
+```
+
+**Example of adding image to advert**
+```sh
+curl -H "Authorization: Bearer {access_token}"\ 
+	 -F "file=@advertphoto.jpg" \
+	 https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/photo
+
+# A response with the status code:
+#   - 201 means the image was added to the advert
+#   - 400 means that something is wrong in the request
+```
+
 Note that:
  - You can only have one advert per license plate since you can publish it multiple times;
  - To add photos you need to create the advert first;
