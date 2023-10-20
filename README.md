@@ -23,7 +23,10 @@ It is **HIGHLY RECOMMENDED** to develop and test all functionalities on your use
 
 If you don't have a SANDBOX advertiser account yet, you can create a new one using the following address: https://auto-frontoffice-sbx.sapo.pt/
 
+In order to test and check how adverts will be presented, please use the testing address https://auto-frontend-sbx.sapo.pt. 
+
 This environment uses the following base addresses:
+ 
  - AUTHORIZATION: https://auto-oauth-sbx.sapo.pt
  - INTEGRATION API: https://auto-integration-sbx.sapo.pt
 
