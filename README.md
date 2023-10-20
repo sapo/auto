@@ -14,7 +14,7 @@ To use the API, these steps must be followed:
 
 We provide two environments of Integration API:
 
-### SANDBOX
+## SANDBOX
 The purpose of SANDBOX environment is to provide a stable and controlled way to help you to develop and test your application when communicating with Auto SAPO.
 
 It is **HIGHLY RECOMMENDED** to develop and test all functionalities on your use cases before start using Production environment. 
@@ -30,7 +30,7 @@ This environment uses the following base addresses:
  - AUTHORIZATION: https://auto-oauth-sbx.sapo.pt
  - INTEGRATION API: https://auto-integration-sbx.sapo.pt
 
-### PRODUCTION
+## PRODUCTION
 Production is the live environment where all interactions will take effect on Auto SAPO website.
 
 New accounts should be created using the following address: https://auto-frontoffice.sapo.pt/
@@ -121,21 +121,51 @@ Now it's time to create a new advert or edit an existing one.
 
 **Example of advert's creation**
 ```sh
-curl -X POST https://auto-integration-sbx.sapo.pt/adverts \
-	 -H "Authorization: Bearer {access_token}" \
-	 -H "Content-Type: application/json" \
-	 -d "{ ...advert properties...  }" 
+# example using curl:
+	curl -X POST https://auto-integration-sbx.sapo.pt/adverts \
+		-H "Authorization: Bearer {access_token}" \
+		-H "Content-Type: application/json" \
+		-d "{ ...advert properties...  }" 
 
 # A response with the status code:
 #   - 201 means the advert was created
 #   - 400 means that something is wrong in advert request
 ```
 
-**Example of adding image to advert**
+### Adding photos to advert
+Before sending us photos, please consider that:
+- You need to create the advert first;
+- We accept traditional web image formats like jpg or png;
+- We accept 30Mb max per upload;
+- All images will be displayed at the 16:9 ratio; 
+- All images are displayed horizontaly;
+- A crop will be applied automaticaly if the original photo does not match this ratio;
+- All images larger than 2048 pixels on width, will be reduced to this width;
+
+**Example: Upload using curl**
 ```sh
 curl -H "Authorization: Bearer {access_token}"\ 
-	 -F "file=@advertphoto.jpg" \
-	 https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/photo
+	-F "file=@advertphoto.jpg" \
+	https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/photo
+
+# A response with the status code:
+#   - 201 means the image was added to the advert
+#   - 400 means that something is wrong in the request
+```
+
+**Example: Upload using raw HTTP**
+```http
+POST https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/photo HTTP/1.1
+Authorization: Bearer {access_token}
+Accept: application/json
+Content-Type: multipart/form-data; boundary=AutoSAPOBoundary
+
+--AutoSAPOBoundary
+Content-Disposition: form-data; name="file"; filename="VehiclePhoto-001.jpg"
+Content-Type: application/octet-stream
+
+< .\VehiclePhoto-001.jpg
+--AutoSAPOBoundary--
 
 # A response with the status code:
 #   - 201 means the image was added to the advert
@@ -144,7 +174,6 @@ curl -H "Authorization: Bearer {access_token}"\
 
 Note that:
  - You can only have one advert per license plate since you can publish it multiple times;
- - To add photos you need to create the advert first;
  - Use `Advertiser locations lookup` to obtain the `locationKey` of advert. Locations are read-only on the API and managed on Backoffice;
  - Changes made to an already published (online) advert will never take effect until you republish it again;
 
