@@ -81,12 +81,12 @@ Before an advert can be created, it is necessary to ensure that AutoSAPO has the
 
 **Examples of check request**
 ```sh
-curl -X HEAD https://auto-integration-sbx.sapo.pt/vehicles/{licenceplate} \
+curl --head https://auto-integration-sbx.sapo.pt/vehicles/{licenceplate} \
 	 -H "Authorization: Bearer {access_token}" 
 
 # OR
 
-curl -X HEAD https://auto-integration-sbx.sapo.pt/vehicles/VIN/{vin} \
+curl --head https://auto-integration-sbx.sapo.pt/vehicles/VIN/{vin} \
 	 -H "Authorization: Bearer {access_token}" 
 
 # A response with the status code:
