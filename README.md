@@ -59,13 +59,14 @@ curl -X POST https://auto-oauth-sbx.sapo.pt/token \
 ```json
 {
   "access_token":"...ey87JkJSUzI1N...",
-  "expires_in":28800
+  "expires_in":3600,
+  "token_type":"Bearer"
 }
 ```
 
 Now you are able to send requests using the Authorization header as follows:
 ```sh
-curl -X GET https://auto-integration.staging.sapo.pt/adverts \
+curl -X GET https://auto-integration-sbx.sapo.pt/adverts \
 	 -H "Authorization: Bearer <TOKEN_FROM_OAUTH_ENDPOINT>"
 ```
 ***NOTE:*** *It is expected the reutilization of access_token across multiple calls while it is valid. You **SHOULD NOT** create an access_token per endpoint call.*
@@ -110,6 +111,31 @@ curl -X POST https://auto-integration-sbx.sapo.pt/vehicles \
 
 Please use the REST API endpoints grouped as `Vehicles` and `Vehicles lookup data`.
 
+### Updating a vehicle
+If you need to correct or complete the information of an existing vehicle, you can update it.
+
+**IMPORTANT** - The advert associated with the vehicle **MUST** be offline (unpublished) before updating the vehicle. Take the advert offline first (see STEP 4), update the vehicle and then publish the advert again.
+
+**Example of vehicle's update**
+```sh
+# 1 - Take the associated advert offline
+curl -X DELETE https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/public \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Accept: application/json"
+
+# 2 - Update the vehicle
+curl -X PUT https://auto-integration-sbx.sapo.pt/vehicles/licenseplate/{licenceplate} \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Content-Type: application/json" \
+	 -H "Accept: application/json" \
+	 -d "{ ...vehicle properties...  }"
+	
+# 3 - Publish the advert again
+curl -X PUT https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/public \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Accept: application/json"
+```
+
 ***NOTE:*** *If you detect that some lookup data is missing (as for example when a manufacturer releases a new model or version) you are always welcome to request us to add it.*
 
 For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/swagger
@@ -132,6 +158,31 @@ Now it's time to create a new advert or edit an existing one.
 #   - 400 means that something is wrong in advert request
 ```
 
+### Updating an advert
+To change an existing advert, send the properties you want to update.
+
+**IMPORTANT** - Changes made to an already published (online) advert will only become visible on Auto SAPO after you publish it again. After republishing, it may take a few minutes until the changes appear on the website.
+
+**Example of advert's update** (advert with id `1X1X1X`)
+```sh
+# Step 1 - Update the advert
+curl -X PUT https://auto-integration-sbx.sapo.pt/adverts/1X1X1X \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Content-Type: application/json" \
+	 -H "Accept: application/json" \
+	 -d '{
+		"locationKey": "eGWtNz9S",
+		"vehicleDescription": "Em muito bom estado.",
+		"price": "3500",
+		"kms": "105000"
+	 }'
+
+# Step 2 - Republish the advert so the changes go online
+curl -X PUT https://auto-integration-sbx.sapo.pt/adverts/1X1X1X/public \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Accept: application/json"
+```
+
 ### Adding photos to advert
 Before sending us photos, please consider that:
 - You need to create the advert first;
@@ -144,7 +195,7 @@ Before sending us photos, please consider that:
 
 **Example: Upload using curl**
 ```sh
-curl -H "Authorization: Bearer {access_token}"\ 
+curl -H "Authorization: Bearer {access_token}" \
 	-F "file=@advertphoto.jpg" \
 	https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/photo
 
@@ -175,7 +226,12 @@ Content-Type: application/octet-stream
 Note that:
  - You can only have one advert per license plate since you can publish it multiple times;
  - Use `Advertiser locations lookup` to obtain the `locationKey` of advert. Locations are read-only on the API and managed on Backoffice;
- - Changes made to an already published (online) advert will never take effect until you republish it again;
+ - Changes made to an already published (online) advert will never take effect until you republish it again. Example:
+```sh
+curl -X PUT https://auto-integration-sbx.sapo.pt/adverts/{idadvert}/public \
+	 -H "Authorization: Bearer {access_token}" \
+	 -H "Accept: application/json"
+```
 
 Please use the REST API endpoints grouped as `Advertiser locations lookup` and `Adverts Management`.
 For a detailed documentation please check: https://auto-integration-sbx.sapo.pt/swagger
